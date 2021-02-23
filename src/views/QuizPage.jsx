@@ -50,47 +50,35 @@ class QuizPage extends React.Component {
 
     componentDidUpdate() {
 
-        if (this.state.quizData.length != 0) {
+        if (this.state.quizData.length != 0 && this.state.isCalled == false) {
             console.log("Quiz Data is not empty");
-            if (this.state.isCalled == false) {
-                this.startQuiz()
-                this.state.isCalled = true;
-            }
+            this.startQuiz()
+            this.state.isCalled = true
         }
     }
 
     startQuiz() {
         const nextBtn = document.getElementById('nextButton')
         const skipBtn = document.getElementById('skipButton')
+        console.log("Start quiz method")
 
         nextBtn.addEventListener('click', () => {
-            let isAns = -1;
+            console.log("Next button clicked")
             this.quizValues()
 
-            // Selecting an ans
+            // Selecting as answer from the options
+            let selectedAns = ""
             const options = document.getElementsByClassName('option')
-            let selectedAns = '';
-            for (let j = 0; j < options.length; j++) {
-                options[j].addEventListener('click', () => {
-                    selectedAns = options[j].innerText
-                    console.log("Selected Ans is " + selectedAns)
-                })
-            }
-            isAns = selectedAns.search(this.state.quizData[this.state.quizValue].answer)
-            console.log("isAns value")
-            console.log(isAns)
-            console.log("Ans for this quesyion is ")
-            console.log(this.state.quizData[this.state.quizValue].answer)
-            if (isAns >= 0) {
-                this.state.quizMarks += 1;
-            }
-            console.log("Quiz Marks " + this.state.quizMarks)
+            options[0].addEventListener('click', () => {
+                console.log("Hello World");
+            })
 
 
         })
         skipBtn.addEventListener('click', () => {
             this.quizValues()
         })
+        console.log("This will be added at last")
     }
 
     quizValues() {
@@ -126,6 +114,7 @@ class QuizPage extends React.Component {
 
             // Setting the state of the quizContent to render in the ui tree
             this.setState({ quizContent: newData })
+            console.log("This is from quizValue function")
         } else {
             console.log("End of quiz")
             //TODO: Go out of the loop
