@@ -83,7 +83,7 @@ class QuizPage extends React.Component {
             console.log(this.state.quizData[this.state.quizValue].answer)
             if (isAns >= 0) {
                 this.state.quizMarks += 1;
-            }
+            } 
             console.log("Quiz Marks " + this.state.quizMarks)
 
 
