@@ -8,7 +8,8 @@ class QuizPage extends React.Component {
         quizContent: [],
         quizValue: 0,
         isCalled: false,
-        quizMarks: 0
+        quizMarks: 0,
+        selectedAns: ''
     }
 
     componentDidMount() {
@@ -58,24 +59,36 @@ class QuizPage extends React.Component {
         const skipBtn = document.getElementById('skipButton')
 
         nextBtn.addEventListener('click', () => {
-            if(selectedAns == this.state.quizData[this.state.quizValue].answer){
+            if (this.state.selectedAns == '') {
+                alert("Please select an option before continuing")
+                this.state.quizValue -= 1;
+            }
+            else if (this.state.selectedAns == this.state.quizData[this.state.quizValue].answer) {
                 console.log('Correct')
                 this.state.quizMarks += 1
-            }else{
+            } else {
                 console.log("False")
             }
             console.log("Your marks is " + this.state.quizMarks)
             this.quizValues()
+            for (let j = 0; j < options.length; j++) {
+                options[j].className = "option"
+            }
+            this.state.selectedAns = ''
         })
 
-        let selectedAns = '';
+        // let selectedAns = '';
         const options = document.getElementsByClassName('option')
-        for(let i = 0 ; i < options.length; i++){
+        for (let i = 0; i < options.length; i++) {
             options[i].addEventListener('click', () => {
-                selectedAns = options[i].innerText.slice(3)
+                this.state.selectedAns = options[i].innerText.slice(3)
+                for (let j = 0; j < options.length; j++) {
+                    options[j].className = "option"
+                }
+                options[i].className = "option active"
             })
         }
-        
+
         skipBtn.addEventListener('click', () => {
             this.quizValues()
         })

@@ -48,3 +48,8 @@ button{
     outline: none;
     border-radius: 2px;
 }
+
+p.active{
+    border: 2px solid green;
+    color: green;
+}
