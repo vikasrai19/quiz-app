@@ -97,6 +97,7 @@ class QuizPage extends React.Component {
                 )
             }
 
+
             // pushing the data into the tree
             newData.push(
                 <div className="quiz">
